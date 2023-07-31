@@ -1,6 +1,7 @@
 # AIR BnB CLONE: THE CONSOLE
 ![logo de mi proyecto](images/hbnb_logo.png)
 
+
 # DESCRIPTION
 
 *-this project is the first step in the creation of the "airbnb clone"
@@ -10,3 +11,5 @@ phases of the project, to create a basic clone of the AirBn & B.
 to manage the objects of the whole project,
 -being able to implement the methods create, show, update, all,
 and destroy to the existing classes and subclasses.*
+
+
