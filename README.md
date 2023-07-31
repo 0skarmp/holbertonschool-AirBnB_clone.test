@@ -1,7 +1,7 @@
-# AIR BnB CLONE: THE CONSOLE
+#AIR BnB CLONE: THE CONSOLE
 ![logo de mi proyecto](images/hbnb_logo.png)
 
-## DESCRIPTION:
+##DESCRIPTION:
 
 This project is the first step in the creation of the "Airbnb clone":
 The project will include six phases. This is the first phase of the project,
