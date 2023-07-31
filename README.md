@@ -1,5 +1,5 @@
 # AIR BnB CLONE: THE CONSOLE
-![logo de mi proyecto]()
+![logo de mi proyecto](images/hbnb_logo.png)
 
 ## DESCRIPTION :
 
