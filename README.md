@@ -11,5 +11,3 @@ phases of the project, to create a basic clone of the AirBn & B.
 to manage the objects of the whole project,
 -being able to implement the methods create, show, update, all,
 and destroy to the existing classes and subclasses.*
-
-
