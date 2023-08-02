@@ -14,17 +14,22 @@ class FileStorage:
         FileStorage.__objects[key] = obj
 
     def save(self):
-        with open(FileStorage.__file_path, "w") as txt:
-            json.dump(FileStorage.__objects, txt)
+        dic_serialized = {}
+        for key, value in FileStorage.__objects.items():
+            dic_serialized[key] = value.to_dict()
+            
+        with open(FileStorage.__file_path, "w", encoding='utf-8') as file:
+            json.dump(dic_serialized, file)
 
     def reload(self):
         """Deserialize the JSON file __file_path to __objects, if it exists."""
-        try:
-            with open(FileStorage.__file_path) as f:
-                objdict = json.load(f)
-                for o in objdict.values():
-                    cls_name = o["_class_"]
-                    del o["_class_"]
-                    self.new(eval(cls_name)(**o))
-        except FileNotFoundError:
-            return
+        if os.path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path, 'r') as f:
+                data = json.load(f)
+
+        for k, v in data.items():
+            class_name, obj_id = key.split(".")
+
+        if class_name == "BaseModel":
+            obj = BaseModel(**value)
+            FileStorage.__object[key] = obj 
