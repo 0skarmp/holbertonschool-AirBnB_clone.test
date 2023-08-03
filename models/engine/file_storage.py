@@ -33,5 +33,10 @@ class FileStorage:
             with open(self.__file_path, 'r') as f:
                 data = f.read()
             self.__objects = json.loads(data)
+
+            new_dict = {}
+
+            for key, value in self.__objects.items():
+                new_dict[key] = value
         else:
             pass
