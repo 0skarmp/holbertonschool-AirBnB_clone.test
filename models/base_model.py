@@ -6,7 +6,7 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """ Sets the initial attributes of an instance of the class """
         if kwargs:
-            for k, v in kwargs.items():
+            for key, value in kwargs.items():
                 if key == '__class__':
                     continue
                 if key == "created_at" or key == "updated_at":
