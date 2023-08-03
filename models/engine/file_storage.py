@@ -32,9 +32,9 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 data = json.load(f)
 
-        for k, v in data.items():
-            class_name, obj_id = key.split(".")
+            for key, value in data.items():
+                class_name, obj_id = key.split(".")
 
-        if class_name == "BaseModel":
-            obj = BaseModel(**value)
-            FileStorage.__object[key] = obj
+                if class_name == "BaseModel":
+                    obj = BaseModel(**value)
+                    FileStorage.__object[key] = obj
