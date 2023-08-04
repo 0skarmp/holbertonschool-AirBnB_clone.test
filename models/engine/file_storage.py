@@ -33,4 +33,5 @@ class FileStorage:
                     cls_name = i["__class__"]
                     del i["__class__"]
                     self.new(eval(cls_name)(**i))
-        return
+        else:
+            pass
