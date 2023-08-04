@@ -5,34 +5,34 @@ import os
 
 class FileStorage:
     """this is a class filestorgare"""
-    def __init__(self):
-        self.__file_path = "file.json"
-        self.__objects = {}
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         """this a method all"""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """this a method new that generate a new isntance"""
         key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key] = obj.to_dict()
+        FileStorage.__objects[key] = obj.to_dict()
 
     def save(self):
         """this method serealized the dictionary in JSON"""
-        dic_serialized = {}
-        for key, value in self.__objects.items():
-            dic_serialized[key] = value
-
-        with open(self.__file_path, "w", encoding="utf-8") as f:
-            json.dump(dic_serialized, f)
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
+            dict_JSON = json.dumps(FileStorage.__objects)
+            f.write(dict_JSON)
 
     def reload(self):
         """Deserialize the JSON file __file_path to __objects, if it exists."""
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r', encoding="utf-8") as f:
                 data = f.read()
+                
+            JSON_dict = json.loads(data)
 
-            self.__objects = json.loads(data)
+            for k, v in JSON_dict.items():
+                obj = eval(v['__class__'])(**v)
+                self.__objects[k] = obj
         else:
             pass
