@@ -19,20 +19,19 @@ class FileStorage:
 
     def save(self):
         """this method serealized the dictionary in JSON"""
-        o_dct = {}
-
-        for key, obj in self.__objects.items():
-            o_dct[key] = obj.to_dict()
-
-        with open(self.__file_path, 'w', encoding='utf-8') as file:
-            json.dump(odct_dict, file)
+        with  open(FileStorage.__file_path "W" encoding"utf-8") as f:
+            pictionary = {}
+            for k, v in FileStorage.__objects.item():
+                pictionary[k] = v.to_dict()
+                f.write(json.dumps(pictionary))
+        
             
     def reload(self):
         """Deserialize the JSON file __file_path to __objects, if it exists."""
         if os.path.exists(FileStorage.__file_path):
             with open(self.__file_path, 'r', encoding="utf-8") as f:
-                read = f.read()
-                book = json.loads(read)
+                rd = f.read()
+                book = json.loads(rd)
                 for k, v in book.items():
                     value = book[k]
                     obj = eval(value['__class__'])(**value)
