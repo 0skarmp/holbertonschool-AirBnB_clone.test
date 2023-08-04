@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import json
 import os
-from models.base_model import BaseModel
+import models
 
 class FileStorage:
     def __init__(self):
@@ -29,9 +29,16 @@ class FileStorage:
 
     def reload(self):
         """Deserialize the JSON file __file_path to __objects, if it exists."""
-        if os.path.exists(self.__file_path) is True:
-            with open(self.__file_path, 'r') as f:
-                for key, value in json.load(f).items():
-                    self.new(dict[value['__class__']](**value))
-        else:
+        try:
+            if os.path.exists(self.__file_path):
+                with open(self.__file_path, 'r') as f:
+                    data = json.load(f)
+                
+                for key, value in data.items():
+                    class_name = value['__class__']
+                    obj_class = globals()[class_name]
+                    obj_instance = obj_class(**value)
+
+                    self.__objects[key] = obj_instance            
+        except:
             pass
