@@ -5,7 +5,7 @@ import os
 
 class FileStorage:
     """this is a class filestorgare"""
-    def __init__(self): 
+    def __init__(self):
         self.__file_path = "file.json"
         self.__objects = {}
 
