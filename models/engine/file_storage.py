@@ -10,17 +10,17 @@ class FileStorage:
 
     def all(self):
         """this a method all"""
-        return FileStorage.__objects
+        return self.__objects
 
     def new(self, obj):
         """this a method new that generate a new isntance"""
         key = f"{obj.__class__.__name__}.{obj.id}"
-        FileStorage.__objects[key] = obj.to_dict()
+        self.__objects[key] = obj.to_dict()
 
     def save(self):
         """this method serealized the dictionary in JSON"""
         with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
-            dict_JSON = json.dumps(FileStorage.__objects)
+            dict_JSON = json.dumps(self.__objects)
             f.write(dict_JSON)
 
     def reload(self):
@@ -28,14 +28,15 @@ class FileStorage:
         from models.base_model import BaseModel
 
 
-        if os.path.exists(self.__file_path):
-            with open(self.__file_path, 'r', encoding="utf-8") as f:
+        if os.path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
                 data = f.read()
                 
             JSON_dict = json.loads(data)
 
             for k, v in JSON_dict.items():
-                obj = eval(v['__class__'])(**v)
+                value = dictionary[k]
+                obj = eval(value['__class__'])(**value)
                 self.__objects[k] = obj
         else:
             pass
