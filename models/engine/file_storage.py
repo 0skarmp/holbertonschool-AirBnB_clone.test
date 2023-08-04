@@ -37,6 +37,10 @@ class FileStorage:
             new_dict = {}
 
             for key, value in self.__objects.items():
-                new_dict[key] = value
+                class_name = key
+                class_id = id(value)
+                new_dict[class_name] = class_id
+
+                self.__objects = new_dict
         else:
             pass
