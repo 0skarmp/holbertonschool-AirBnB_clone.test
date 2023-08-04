@@ -5,8 +5,9 @@ import os
 
 class FileStorage:
     """this is a class filestorgare"""
-    __file_path = "file.json"
-    __objects = {}
+    def __init__(self): 
+        self.__file_path = "file.json"
+        self.__objects = {}
 
     def all(self):
         """this a method all"""
@@ -15,7 +16,7 @@ class FileStorage:
     def new(self, obj):
         """this a method new that generate a new isntance"""
         key = f"{obj.__class__.__name__}.{obj.id}"
-        FileStorage.__objects[key] = obj.to_dict()
+        self.__objects[key] = obj.to_dict()
 
     def save(self):
         """this method serealized the dictionary in JSON"""
@@ -23,21 +24,15 @@ class FileStorage:
         for key, value in self.__objects.items():
             dic_serialized[key] = value
 
-        with open(self.__file_path, "w", encoding='utf-8') as file:
-            json.dump(dic_serialized, file)
+        with open(self.__file_path, "w", encoding="utf-8") as f:
+            json.dump(dic_serialized, f)
 
     def reload(self):
         """Deserialize the JSON file __file_path to __objects, if it exists."""
-        from models.base_model import BaseModel
-
         if os.path.exists(self.__file_path):
-            with open(self.__file_path, 'r') as f:
-                objects_data = json.load(f)
-            for key, value in objects_data.items():
-                class_name, obj_id = key.split(".")
-                class_obj = eval(class_name)
-                obj_instance = class_obj(**value)
-                self.new(obj_instance)
+            with open(self.__file_path, 'r', encoding="utf-8") as f:
+                data = f.read()
 
+            self.__objects = json.loads(data)
         else:
             pass
