@@ -4,10 +4,9 @@ import os
 
 
 class FileStorage:
-    def __init__(self):
-        """this is a class filestorgare"""
-        self.__file_path = "file.json"
-        self.__objects = {}
+    """this is a class filestorgare"""
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         """this a method all"""
@@ -16,7 +15,7 @@ class FileStorage:
     def new(self, obj):
         """this a method new that generate a new isntance"""
         key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key] = obj.to_dict()
+        FileStorage.__objects[key] = obj.to_dict()
 
     def save(self):
         """this method serealized the dictionary in JSON"""
