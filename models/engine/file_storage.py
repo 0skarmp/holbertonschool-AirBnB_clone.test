@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import json
 import os
-
+from models.base_model import BaseModel
 
 class FileStorage:
     """this is a class filestorgare"""
@@ -19,19 +19,23 @@ class FileStorage:
 
     def save(self):
         """this method serealized the dictionary in JSON"""
-        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
-            dict_JSON = json.dumps(self.__objects)
-            f.write(dict_JSON)
+        o_dct = {}
 
+        for key, obj in self.__objects.items():
+            o_dct[key] = obj.to_dict()
+
+        with open(self.__file_path, 'w', encoding='utf-8') as file:
+            json.dump(odct_dict, file)
+            
     def reload(self):
-        from models.base_model import BaseModel
         """Deserialize the JSON file __file_path to __objects, if it exists."""
         if os.path.exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path) as f:
-                data = json.load(f)
-                for i in data.values():
-                    cls_name = i["__class__"]
-                    del i["__class__"]
-                    self.new(eval(cls_name)(**i))
+            with open(self.__file_path, 'r', encoding="utf-8") as f:
+                read = f.read()
+                book = json.loads(read)
+                for k, v in book.items():
+                    value = book[k]
+                    obj = eval(value['__class__'])(**value)
+                    FileStorage.__objects[k] = obj
         else:
             pass
