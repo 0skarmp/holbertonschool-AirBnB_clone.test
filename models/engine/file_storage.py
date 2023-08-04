@@ -14,8 +14,12 @@ class FileStorage:
 
     def new(self, obj):
         """this a method new that generate a new isntance"""
-        key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key] = obj
+        bjects["{}.\
+{}".format(obj.__class__.__name__, obj.id)] = obj
+
+       """ key = f"{obj.__class__.__name__}.{obj.id}"
+        self.__objects[key] = obj"""
+        
 
     def save(self):
         """this method serealized the dictionary in JSON"""
