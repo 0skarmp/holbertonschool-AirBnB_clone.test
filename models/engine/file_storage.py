@@ -28,13 +28,16 @@ class FileStorage:
             json.dump(dic_serialized, file)
 
     def reload(self):
-        """deserializes the JSON file to __objects"""
-        try:
+        """Deserialize the JSON file __file_path to __objects, if it exists."""
+        if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as f:
-                jo = json.load(f)
-            for key in jo:
-                self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
-        except:
-            pass
-        else:
-            pass
+                data = json.load(f)
+
+            for key, value in data.items():
+                class_name = value['__class__']
+                obj_class = globals()[class_name]
+                obj_instance = obj_class(**value)
+
+                self.__objects[key] = obj_instance            
+            else:
+                pass
