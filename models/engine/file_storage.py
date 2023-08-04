@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import json
 import os
-from models.base_model import BaseModel
+
 
 class FileStorage:
     """this is a class filestorgare"""
@@ -10,34 +10,32 @@ class FileStorage:
 
     def all(self):
         """this a method all"""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """this a method new that generate a new isntance"""
-        bjects["{}.\
-{}".format(obj.__class__.__name__, obj.id)] = obj
-
-       """ key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key] = obj"""
+        key = f"{obj.__class__.__name__}.{obj.id}"
+        FileStorage.__objects[key] = obj.to_dict()
         
 
     def save(self):
         """this method serealized the dictionary in JSON"""
-        with  open(FileStorage.__file_path "W" encoding"utf-8") as f:
-            pictionary = {}
-            for k, v in FileStorage.__objects.item():
-                pictionary[k] = v.to_dict()
-                f.write(json.dumps(pictionary))
-        
-            
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
+            dict_JSON = json.dumps(FileStorage.__objects)
+            f.write(dict_JSON)
+
     def reload(self):
+        from models.base_model import BaseModel
+
+
         """Deserialize the JSON file __file_path to __objects, if it exists."""
         if os.path.exists(FileStorage.__file_path):
-            with open(self.__file_path, 'r', encoding="utf-8") as f:
-                rd = f.read()
-                book = json.loads(rd)
-                for k, v in book.items():
-                    value = book[k]
+            with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
+                data = f.read()
+                JSON_dict = json.loads(data)
+
+                for k, v in JSON_dict.items():
+                    value = JSON_dict[k]
                     obj = eval(value['__class__'])(**value)
                     FileStorage.__objects[k] = obj
         else:
