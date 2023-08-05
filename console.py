@@ -28,19 +28,35 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Do nothing when an empty line is entered"""
         pass
-    
+
     def do_create(self, arg):
         """Do created new instance of the class and print ID"""
         if not arg:
             print("** class name missing **")
 
-        elif arg not in HBNBCommand.l_class: 
+        elif arg not in HBNBCommand.l_class:
             print("** class doesn't exist **")
-        
+
         else:
             dct = {'BaseModel': BaseModel}
             obj = dct[arg]()
             print(obj.id)
+
+    def do_show(self, arg):
+        """ show the class name and id """
+        class_id = arg.split()
+        if not class_id:
+            print("** class name missing **")
+
+        elif class_id[0] not in HBNBCommand.l_class:
+            print("** class doesnt exist **")
+
+        elif len(class_id) < 2:
+            print("** instance id missing **")
+
+        else:
+            print(f"{class_id[0]} {class_id[1]}")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
