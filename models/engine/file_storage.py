@@ -34,9 +34,9 @@ class FileStorage:
                 data = f.read()
                 JSON_dict = json.loads(data)
 
-                for k, v in JSON_dict.items():
-                    value = JSON_dict[k]
+                for key, value in JSON_dict.items():
+                    value = JSON_dict[key]
                     obj = eval(value['__class__'])(**value)
-                    FileStorage.__objects[k] = obj
+                    FileStorage.__objects[key] = obj
         else:
             pass
