@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import json
 import os
-from models.base_model import BaseModel
+
 
 class FileStorage:
     """this is a class filestorgare"""
@@ -14,31 +14,26 @@ class FileStorage:
 
     def new(self, obj):
         """this a method new that generate a new isntance"""
-        bjects["{}.\
-{}".format(obj.__class__.__name__, obj.id)] = obj
-
-       """ key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key] = obj"""
-        
+        key = f"{obj.__class__.__name__}.{obj.id}"
+        self.__objects[key] = obj        
 
     def save(self):
         """this method serealized the dictionary in JSON"""
-        with  open(FileStorage.__file_path "W" encoding"utf-8") as f:
-            pictionary = {}
-            for k, v in FileStorage.__objects.item():
-                pictionary[k] = v.to_dict()
-                f.write(json.dumps(pictionary))
+        new_dictionay = {}
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
+            for k, v in self.__objects.items():
+                new_dictionary[key] = v.to_dict()
+            dict_JSON = json.dumps(FileStorage.__objects)
+            f.write(dict_JSON)
         
             
     def reload(self):
         """Deserialize the JSON file __file_path to __objects, if it exists."""
-        if os.path.exists(FileStorage.__file_path):
-            with open(self.__file_path, 'r', encoding="utf-8") as f:
-                rd = f.read()
-                book = json.loads(rd)
-                for k, v in book.items():
-                    value = book[k]
-                    obj = eval(value['__class__'])(**value)
-                    FileStorage.__objects[k] = obj
-        else:
-            pass
+        if os.path.exists(self.__file_path):
+            from models.base_model import BaseModel
+            with open(FileStorage.__file_path) as f:
+                objdict = json.load(f)
+                for o in objdict.values():
+                    cls_name = o["__class__"]
+                    del o["__class__"]
+                    self.new(eval(cls_name)(**o))

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-import uuid
-import datetime
-from models import storage
+from uuid import uuid4
+from datetime import datetime
+import models 
 
 
 class BaseModel:
@@ -13,14 +13,14 @@ class BaseModel:
                     continue
                 if key == "created_at" or key == "updated_at":
                     fdT = "%Y-%m-%dT%H:%M:%S.%f"
-                    value = datetime.datetime.strptime(value, fdT)
+                    value = datetime.strptime(value, fdT)
                 setattr(self, key, value)
 
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.datetime.now()
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
             self.updated_at = self.created_at
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """ __str__ special method"""
@@ -28,13 +28,13 @@ class BaseModel:
 
     def save(self):
         """ save method"""
-        self.updated_at = datetime.datetime.now()
-        storage.save()
+        self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """ to_dict method converts from object - dictionary """
         dict_copy = self.__dict__.copy()
         dict_copy["__class__"] = self.__class__.__name__
-        dict_copy["created_at"] = self.created_at.isoformat()
-        dict_copy["updated_at"] = self.updated_at.isoformat()
+        dict_copy["created_at"] = str(self.created_at.isoformat())
+        dict_copy["updated_at"] = str(self.updated_at.isoformat())
         return dict_copy
