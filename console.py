@@ -4,6 +4,7 @@ this console define a "airBnB" console.
 """
 import cmd
 import sys
+from models import storage
 from models.base_model import BaseModel
 
 
@@ -40,6 +41,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             dct = {'BaseModel': BaseModel}
             obj = dct[arg]()
+            obj.save()
             print(obj.id)
 
     def do_show(self, arg):
@@ -55,7 +57,14 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
 
         else:
-            print(f"{class_id[0]} {class_id[1]}")
+            key = "{}.{}".format(class_id[0], class_id[1])
+            all_objects = storage.all()
+
+            if key not in all_objects:
+                print("** no instance found **")
+
+            else:
+                print(f"{all_objects[key]}")
 
 
 if __name__ == '__main__':
