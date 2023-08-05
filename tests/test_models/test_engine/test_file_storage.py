@@ -1,18 +1,10 @@
 #!/USR/BIN/PYTHON3
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-
 import os
 import json
 import unittest
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+
 
 class TestFileStorage(unittest.TestCase):
 
@@ -25,18 +17,4 @@ class TestFileStorage(unittest.TestCase):
         self.assertIsInstance(file_object, dict, "__file_object is not dictionary")
 
 if _name_ == '_main_':
-    unittest.main()
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-"""DENZEL NO TE COPPIES POR FAVOR :v"""
-
-   
+    unittest.main() 
