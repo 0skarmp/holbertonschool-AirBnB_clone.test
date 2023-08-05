@@ -10,30 +10,38 @@ class FileStorage:
 
     def all(self):
         """this a method all"""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """this a method new that generate a new isntance"""
         key = f"{obj.__class__.__name__}.{obj.id}"
+
         self.__objects[key] = obj        
 
     def save(self):
         """this method serealized the dictionary in JSON"""
-        new_dictionay = {}
-        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
-            for k, v in self.__objects.items():
-                new_dictionary[key] = v.to_dict()
-            dict_JSON = json.dumps(FileStorage.__objects)
-            f.write(dict_JSON)
+        new_dictionary = {}
         
+        for k, v in self.__objects.items():
+            new_dictionary[k] = v.to_dict()
+            
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as file:
+                json.dump(new_dictionary, file)  
             
     def reload(self):
-        """Deserialize the JSON file __file_path to __objects, if it exists."""
-        if os.path.exists(self.__file_path):
-            from models.base_model import BaseModel
-            with open(FileStorage.__file_path) as f:
-                objdict = json.load(f)
-                for o in objdict.values():
-                    cls_name = o["__class__"]
-                    del o["__class__"]
-                    self.new(eval(cls_name)(**o))
+        from models.base_model import BaseModel
+
+
+        """Deserialize the JSON file __file_path to __objects, if it exists"""
+        
+        if os.path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
+                data = f.read()
+                JSON_dict = json.loads(data)
+
+                for k, v in JSON_dict.items():
+                    value = JSON_dict[k]
+                    obj = eval(value['__class__'])(**value)
+                    FileStorage.__objects[k] = obj
+        else:
+            pass
