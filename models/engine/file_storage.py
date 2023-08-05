@@ -20,13 +20,13 @@ class FileStorage:
 
     def save(self):
         """this method serealized the dictionary in JSON"""
-        new_dictionary = {}
+        dictionary = {}
         
         for k, v in self.__objects.items():
-            new_dictionary[k] = v.to_dict()
+            dictionary[k] = v.to_dict()
             
         with open(FileStorage.__file_path, "w", encoding="utf-8") as file:
-                json.dump(new_dictionary, file)  
+                json.dump(dictionary, file)  
             
     def reload(self):
         from models.base_model import BaseModel
