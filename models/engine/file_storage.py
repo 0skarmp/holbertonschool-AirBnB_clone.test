@@ -15,20 +15,25 @@ class FileStorage:
     def new(self, obj):
         """this a method new that generate a new isntance"""
         key = f"{obj.__class__.__name__}.{obj.id}"
-        FileStorage.__objects[key] = obj.to_dict()
-        
+
+        self.__objects[key] = obj        
 
     def save(self):
         """this method serealized the dictionary in JSON"""
-        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
-            dict_JSON = json.dumps(FileStorage.__objects)
-            f.write(dict_JSON)
-
+        new_dictionary = {}
+        
+        for k, v in self.__objects.items():
+            new_dictionary[k] = v.to_dict()
+            
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as file:
+                json.dump(new_dictionary, file)  
+            
     def reload(self):
         from models.base_model import BaseModel
 
 
-        """Deserialize the JSON file __file_path to __objects, if it exists."""
+        """Deserialize the JSON file __file_path to __objects, if it exists"""
+        
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
                 data = f.read()
