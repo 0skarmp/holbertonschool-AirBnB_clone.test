@@ -6,7 +6,8 @@ import cmd
 import sys
 from models import storage
 from models.base_model import BaseModel
-import models.user import user
+from models.user import User
+
 
 class HBNBCommand(cmd.Cmd):
     """
