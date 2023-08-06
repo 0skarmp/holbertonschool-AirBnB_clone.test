@@ -101,9 +101,8 @@ class HBNBCommand(cmd.Cmd):
                 if type(obj).__name__ == class_id[0]:
                     data.append(str(obj))
             print(data)
-    else:
-        print("** class doesn't exist **")
-        
+        else:
+            print("** class doesn't exist **")
 
     def do_update(self, arg):
         class_id = arg.split()
@@ -125,11 +124,11 @@ class HBNBCommand(cmd.Cmd):
             else:
                 attribute_name = class_id[2]
                 attribute_value = class_id[3]
-                
+
                 obj = all_objects[key]
                 setattr(obj, attribute_name, attribute_value)
                 storage.save()
-                
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
