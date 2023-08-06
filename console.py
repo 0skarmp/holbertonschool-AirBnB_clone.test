@@ -91,16 +91,14 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         class_id = arg.split()
-        if not class_id:
-            print ("**class name missing**")
-        elif class_id[0] not in HBNBCommand.l_class:
+        if class_id[0] not in HBNBCommand.l_class:
             print("** class doesn't exist **")
         else:
             data = []
             all_objects = storage.all()
 
             for obj in all_objects.values():
-                if not class_id[0] or type(obj).__name__ == class_id[0]:
+                if type(obj).__name__ == class_id[0]:
                     data.append(str(obj))
             print(data)
 
