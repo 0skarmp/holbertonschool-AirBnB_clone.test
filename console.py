@@ -51,7 +51,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
         elif class_id[0] not in HBNBCommand.l_class:
-            print("** class doesnt exist **")
+            print("** class doesn't exist **")
 
         elif len(class_id) < 2:
             print("** instance id missing **")
@@ -73,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
         elif class_id[0] not in HBNBCommand.l_class:
-            print("** class doesnt exist **")
+            print("** class doesn't exist **")
 
         elif len(class_id) < 2:
             print("** instance id missing **")
@@ -125,9 +125,9 @@ class HBNBCommand(cmd.Cmd):
                 attribute_name = class_id[2]
                 attribute_value = class_id[3]
                 
-            obj = all_objects[key]
-            setattr(obj, attribute_name, attribute_value)
-            storage.save()
+                obj = all_objects[key]
+                setattr(obj, attribute_name, attribute_value)
+                storage.save()
                 
 
 if __name__ == '__main__':
