@@ -90,10 +90,10 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_all(self, arg):
-        class_id = arg.split()
-        if class_id[0] not in HBNBCommand.l_class:
-            print("** class doesn't exist **")
+        if not arg:
+            print([str(v) for v in storage.all().values()])
         else:
+            class_id = arg.split()
             data = []
             all_objects = storage.all()
 
@@ -101,6 +101,9 @@ class HBNBCommand(cmd.Cmd):
                 if type(obj).__name__ == class_id[0]:
                     data.append(str(obj))
             print(data)
+    else:
+        print("** class doesn't exist **")
+        
 
     def do_update(self, arg):
         class_id = arg.split()
