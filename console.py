@@ -128,7 +128,7 @@ class HBNBCommand(cmd.Cmd):
                 obj = all_objects[key]
                 setattr(obj, attribute_name, attribute_value)
                 storage.save()
-                print(ok)
+                
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
