@@ -15,7 +15,7 @@ class HBNBCommand(cmd.Cmd):
    the classes of the console.
     """
     prompt = '(hbnb)'
-    l_class = ['BaseModel', "User"]
+    l_class = ['BaseModel', 'User']
 
     def do_quit(self, arg):
         """  quit command to exit the program"""
@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
         else:
-            dct = {'BaseModel': BaseModel}
+            dct = {'BaseModel': BaseModel, 'User': User}
             obj = dct[arg]()
             obj.save()
             print(obj.id)
