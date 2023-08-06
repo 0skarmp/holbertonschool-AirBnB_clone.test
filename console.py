@@ -94,15 +94,16 @@ class HBNBCommand(cmd.Cmd):
             print([str(v) for v in storage.all().values()])
         else:
             class_id = arg.split()
-            data = []
-            all_objects = storage.all()
+            if class_id[0] in HBNBCommand.l_class:
+                data = []
+                all_objects = storage.all()
 
-            for obj in all_objects.values():
-                if type(obj).__name__ == class_id[0]:
-                    data.append(str(obj))
-            print(data)
-        else:
-            print("** class doesn't exist **")
+                for obj in all_objects.values():
+                    if type(obj).__name__ == class_id[0]:
+                        data.append(str(obj))
+                print(data)
+            else:
+                print("** class doesn't exist **")
 
     def do_update(self, arg):
         class_id = arg.split()
