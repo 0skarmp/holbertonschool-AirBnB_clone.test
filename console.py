@@ -42,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
             dct = {'BaseModel': BaseModel}
             obj = dct[arg]()
             obj.save()
-            print(obj.id[:2])
+            print(obj.id)
 
     def do_show(self, arg):
         """ show the class name and id """
