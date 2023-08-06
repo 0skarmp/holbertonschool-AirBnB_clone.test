@@ -6,7 +6,7 @@ import cmd
 import sys
 from models import storage
 from models.base_model import BaseModel
-
+import models.user import user
 
 class HBNBCommand(cmd.Cmd):
     """
@@ -14,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
    the classes of the console.
     """
     prompt = '(hbnb)'
-    l_class = ['BaseModel']
+    l_class = ['BaseModel', "User"]
 
     def do_quit(self, arg):
         """  quit command to exit the program"""
