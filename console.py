@@ -7,6 +7,11 @@ import sys
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.amenity import Amenity
+from models.city import City
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -15,7 +20,15 @@ class HBNBCommand(cmd.Cmd):
    the classes of the console.
     """
     prompt = '(hbnb)'
-    l_class = ['BaseModel', 'User']
+    l_class = [
+        "BaseModel",
+        "User",
+        "State",
+        "City",
+        "Place",
+        "Amenity",
+        "Review"
+        ]
 
     def do_quit(self, arg):
         """  quit command to exit the program"""
@@ -40,7 +53,16 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
         else:
-            dct = {'BaseModel': BaseModel, 'User': User}
+            dct = {
+                    'BaseModel': BaseModel,
+                    'User': User,
+                    'State': State,
+                    "City": City,
+                    "Place": Place,
+                    "Review": Review,
+                    "Amenity": Amenity
+                    }
+
             obj = dct[arg]()
             obj.save()
             print(obj.id)
